@@ -1,0 +1,18 @@
+.navbar-container{
+    height:65px;
+    width:100%;
+    background-color: black;
+}
+
+.navbar{
+    max-width:1200px;
+    margin:0 auto;
+    display: flex;
+    align-items: center;
+    height:100%;
+}
+
+.navbar-img{
+    margin-left:20px;
+    height: 46px;
+}
