@@ -1,0 +1,16 @@
+.item-card {
+    cursor: pointer;
+    display: flex;
+    width:250px;
+    padding:20px;
+    flex-direction: column;
+}
+
+.item-card img {
+    width: 100%;
+    height: auto;
+}
+
+.item-card-content {
+    padding: 10px;
+}

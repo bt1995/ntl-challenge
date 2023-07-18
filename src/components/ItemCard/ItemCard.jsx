@@ -1,17 +1,28 @@
 import React from 'react'
+
+import './ItemCard.css'
 import useFetchData from '../../helpers/fetchData'
 
 const ItemCard = () => {
 
     const {loading, data, error } = useFetchData("https://itx-frontend-test.onrender.com/api/product")
   return (
-    <div>
+    <>
         {
             loading ? <p>Loading ...</p> 
             : error ? <p>An error occured</p> :
-            data.map(el=> <p key={el.id}>{el.model}</p>)
+            data.map(el=> (
+                <div className="item-card" key={el.id}>
+                    <img src={el?.imgUrl} alt="Product" />
+                    <div className="item-card-content">
+                        <p>Brand: {el?.brand}</p>
+                        <p>Model: {el?.model}</p>
+                        <p>Price: {el?.price}</p>
+                    </div>
+                </div>
+            ))
         }
-    </div>
+    </>
   )
 }
 
