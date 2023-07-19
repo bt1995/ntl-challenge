@@ -8,19 +8,27 @@ const useDataWithCache = (url) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const cachedData = localStorage.getItem(url);
+        const cacheData = localStorage.getItem(url);
+        const cacheTimestamp = localStorage.getItem(`${url}-timestamp`);
+        const currentTime = new Date().getTime();
 
-        if (cachedData) {
-          setData(JSON.parse(cachedData));
-          setLoading(false);
-        } else {
-          const response = await fetch(url);
-          const responseData = await response.json();
+        if (cacheData && cacheTimestamp) {
+          const timeElapsed = currentTime - Number(cacheTimestamp);
 
-          setData(responseData);
-          setLoading(false);
-          localStorage.setItem(url, JSON.stringify(responseData));
+          if (timeElapsed < 3600000) {
+            setData(JSON.parse(cacheData));
+            setLoading(false);
+            return;
+          }
         }
+
+        const response = await fetch(url);
+        const responseData = await response.json();
+
+        setData(responseData);
+        setLoading(false);
+        localStorage.setItem(url, JSON.stringify(responseData));
+        localStorage.setItem(`${url}-timestamp`, currentTime.toString());
       } catch (err) {
         setError(err);
         setLoading(false);
