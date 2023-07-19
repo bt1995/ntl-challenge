@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Dropdown = ({ options, label, setColorCode, setStorageCode }) => {
-  
-  if(options.length === 1){
-    if(label ==="Color:"){
-      setColorCode(options[0].code)
-    }else{
-      setStorageCode(options[0].code)
+  useEffect(()=>{
+    if(options.length === 1){
+      if(label ==="Color:"){
+        setColorCode(options[0].code)
+      }else{
+        setStorageCode(options[0].code)
+      }
     }
-  }
+  })
 
   const handleChange = (event) => {
     if(label ==="Color:"){
@@ -23,7 +24,7 @@ const Dropdown = ({ options, label, setColorCode, setStorageCode }) => {
       <label>{label}</label>
       <select onChange={handleChange}>
         {options.length === 1 ? (
-          <option value={options[0].code} selected>
+          <option value={options[0].code} defaultValue>
             {options[0].name}
           </option>
         ) : (

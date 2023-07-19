@@ -20,7 +20,6 @@ const ItemDescription = () => {
       colorCode: newColorCode, 
       storageCode: newStorageCode
     }
-    console.log('yo')
     const {data} = await axios.post("https://itx-frontend-test.onrender.com/api/cart", dataAsBody)
     console.log(data)
   }
