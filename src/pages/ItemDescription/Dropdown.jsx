@@ -11,7 +11,6 @@ const Dropdown = ({ options, label, setColorCode, setStorageCode }) => {
   }
 
   const handleChange = (event) => {
-    // Handle the selected option here (if needed)
     if(label ==="Color:"){
       setColorCode(event.target.value)
     }else{
