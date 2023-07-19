@@ -9,10 +9,20 @@
     margin:0 auto;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height:100%;
 }
 
 .navbar-img{
-    margin-left:20px;
     height: 46px;
+}
+
+@media(max-width:1200px){
+    .navbar-img{
+        padding-left:20px;
+    }
+
+    .search-area{
+        padding-right:20px;
+    }
 }

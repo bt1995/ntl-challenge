@@ -2,8 +2,8 @@
     cursor: pointer;
     display: flex;
     width:250px;
-    padding:20px;
     flex-direction: column;
+    margin:20px;
 }
 
 .item-card a{

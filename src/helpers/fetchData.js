@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const useFetchData = (url) => {
+const useFetchData = (url, post) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,7 +11,8 @@ const useFetchData = (url) => {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get(url);
+        const whatMethod = () => post ? axios.post(url, post) : axios.get(url)
+        const response = await whatMethod()
 
         if (isMounted) {
           setData(response.data);
