@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+import './Dropdown.css'
+
 const Dropdown = ({ options, label, setColorCode, setStorageCode }) => {
   useEffect(()=>{
     if(options.length === 1){
@@ -20,9 +22,9 @@ const Dropdown = ({ options, label, setColorCode, setStorageCode }) => {
   };
 
   return (
-    <div>
-      <label>{label}</label>
-      <select onChange={handleChange}>
+    <div className='dropdown-container'>
+      <span className='dropdown-label'><label>{label}</label></span>
+      <select onChange={handleChange} className='dropdown-selector'>
         {options.length === 1 ? (
           <option value={options[0].code} defaultValue>
             {options[0].name}

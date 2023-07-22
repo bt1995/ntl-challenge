@@ -9,10 +9,10 @@ const ItemCard = ({loading, data, error}) => {
         {
             loading ? <p>Loading...</p> 
             : error ? <p>An error occured</p> :
-            data.map(el=> (
-                <div className="item-card" key={el.id} >
+            data?.map(el=> (
+                <div className="item-card" key={el.id}>
                     <Link to={`/${el.id}`}>
-                        <img src={el?.imgUrl} alt="Product" />
+                        <div className='item-card-img'><img src={el?.imgUrl} alt="Product" /></div>
                         <div className="item-card-content">
                             <p>Brand: {el?.brand}</p>
                             <p>Model: {el?.model}</p>

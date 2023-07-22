@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import './ItemDescription.css'
 import useFetchData from '../../helpers/fetchData'
-import Dropdown from './Dropdown';
+import Dropdown from './Dropdown/Dropdown';
 
 const ItemDescription = () => {
   const [colorCode, setColorCode] = useState(null)
@@ -21,7 +21,20 @@ const ItemDescription = () => {
       storageCode: newStorageCode
     }
     const {data} = await axios.post("https://itx-frontend-test.onrender.com/api/cart", dataAsBody)
-    console.log(data)
+  }
+
+  const objectToMap = {
+    "Brand": "brand",
+    "Model": "model",
+    "Price": "price",
+    "CPU": "cpu",
+    "RAM": "ram",
+    "OS": "brand",
+    "Resolution": "displayResolution",
+    "Battery": "battery",
+    "Camera": "primaryCamera",
+    "Dimension": "dimentions",
+    "Weight": "weight",
   }
 
   return (
@@ -35,18 +48,13 @@ const ItemDescription = () => {
                 <img src={data?.imgUrl} alt="Mobile Image" />
               </div>
               <div className='item-description'>
+
                 <div>
-                  <p>Brand: {data?.brand}</p>
-                  <p>Model: {data?.model}</p>
-                  <p>Price: {data?.price}</p>
-                  <p>CPU: {data?.cpu}</p>
-                  <p>RAM: {data?.ram}</p>
-                  <p>OS: {data?.brand}</p>
-                  <p>Resolution: {data?.displayResolution}</p>
-                  <p>Battery: {data?.battery}</p>
-                  <p>Camera: {data?.primaryCamera[0]}</p>
-                  <p>Dimension: {data?.dimentions}</p>
-                  <p>Weight: {data?.weight}</p>
+                  {Object.keys(objectToMap).map((el)=>{
+                    const isCamera = el === "Camera";
+                    const whatData = isCamera ? data?.[objectToMap[el]][0] : data?.[objectToMap[el]]
+                    return <p><span className='item-title'>{el}:</span> <span className='item-data'>{whatData}</span></p>
+                  })}
                 </div>
 
                 <div className='item-actions'>

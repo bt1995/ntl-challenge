@@ -1,17 +1,18 @@
-import React from 'react'
-
 import './Home.css'
 import ItemCard from '../../components/ItemCard/ItemCard'
-import useFetchData from '../../helpers/fetchData'
 
-const Home = () => {
-  // Here I'm trying to get the items from localstorage.
-  const {loading, data, error} = useFetchData("https://itx-frontend-test.onrender.com/api/product")
+const Home = ({data, loading, error, searchTerm}) => {
+
+  const filteredData = data?.filter(el =>
+      el.brand.toLowerCase().includes(searchTerm) ||
+      el.model.toLowerCase().includes(searchTerm)
+  );
+
   return (
     <div className='home-page-container'>
         <ItemCard
           loading={loading}
-          data={data}
+          data={filteredData}
           error={error}
          />   
     </div>

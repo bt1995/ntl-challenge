@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { setItemList } from '../redux/slices/itemListSlice';
 
 const useDataWithCache = (url) => {
+  const dispatch = useDispatch();
+
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -26,6 +31,7 @@ const useDataWithCache = (url) => {
         const responseData = await response.json();
 
         setData(responseData);
+        dispatch(setItemList(data));
         setLoading(false);
         localStorage.setItem(url, JSON.stringify(responseData));
         localStorage.setItem(`${url}-timestamp`, currentTime.toString());
