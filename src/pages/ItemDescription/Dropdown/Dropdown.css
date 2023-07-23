@@ -1,0 +1,17 @@
+.dropdown-container{
+    display:flex;
+    border-bottom: 1px solid black;
+    align-items: center;
+}
+
+.dropdown-label{
+    width:157px;
+    display:flex;
+    margin:0;
+    padding:10px 0;
+}
+
+.dropdown-selector{
+    height: 30px;
+    width: 100%;
+}

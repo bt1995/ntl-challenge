@@ -10,9 +10,11 @@ const ItemDescription = () => {
   const [colorCode, setColorCode] = useState(null)
   const [storageCode, setStorageCode] = useState(null)
   let { id } = useParams();
+  const isBtnActive = colorCode && storageCode;
   const {loading, data, error} = useFetchData("https://itx-frontend-test.onrender.com/api/product/"+id)
   
   const useAddToCartHandler = async () => {
+    if(!isBtnActive) return alert("You must choose both color and storage to continue.");
     const newColorCode = parseInt(colorCode)
     const newStorageCode = parseInt(storageCode)
     const dataAsBody = {
@@ -37,8 +39,9 @@ const ItemDescription = () => {
     "Weight": "weight",
   }
 
+
   return (
-    <div className='item-desc-container'>
+    <div className='item-description-wrapper'>
         {
           loading ? <p>Loading...</p>
           : error ? <p>Some error occured...</p>
@@ -47,9 +50,8 @@ const ItemDescription = () => {
               <div className='item-image-container'>
                 <img src={data?.imgUrl} alt="Mobile Image" />
               </div>
-              <div className='item-description'>
-
-                <div>
+              <div className='item-description-container'>
+                <div className='item-content'>
                   {Object.keys(objectToMap).map((el)=>{
                     const isCamera = el === "Camera";
                     const whatData = isCamera ? data?.[objectToMap[el]][0] : data?.[objectToMap[el]]
@@ -57,10 +59,10 @@ const ItemDescription = () => {
                   })}
                 </div>
 
-                <div className='item-actions'>
+                <div className='item-actions item-content'>
                   <Dropdown setColorCode={setColorCode} options={data?.options.colors} label="Color:" />
                   <Dropdown setStorageCode={setStorageCode} options={data?.options.storages} label="Storage:" />
-                  <button onClick={useAddToCartHandler}>Add to cart</button>
+                  <button className={`add-to-cart-btn ${isBtnActive ? 'add-active': 'add-disabled'}`} onClick={useAddToCartHandler}>Add to cart</button>
                 </div>
               </div>
             </>
