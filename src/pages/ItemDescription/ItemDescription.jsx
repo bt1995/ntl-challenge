@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 import './ItemDescription.css'
 import useFetchData from '../../helpers/fetchData'
 import Dropdown from './Dropdown/Dropdown';
+import { setItemCount } from '../../redux/slices/itemListSlice';
 
 const ItemDescription = () => {
   const [colorCode, setColorCode] = useState(null)
   const [storageCode, setStorageCode] = useState(null)
-  let { id } = useParams();
-  const isBtnActive = colorCode && storageCode;
+  let { id } = useParams()
+  const dispatch = useDispatch();
+  const isBtnActive = colorCode && storageCode
   const {loading, data, error} = useFetchData("https://itx-frontend-test.onrender.com/api/product/"+id)
   
   const useAddToCartHandler = async () => {
@@ -26,11 +29,9 @@ const ItemDescription = () => {
 
     const {data} = await axios.post("https://itx-frontend-test.onrender.com/api/cart", dataAsBody);
     let previousCount = localStorage.getItem('cartListAmount')
-    if(previousCount){
-      localStorage.setItem('cartListAmount', parseInt(previousCount) + data.count)
-    }else{
-      localStorage.setItem('cartListAmount', data.count)
-    }
+    let whatNumber = previousCount ? parseInt(previousCount) : 0
+    localStorage.setItem('cartListAmount', whatNumber + data.count)
+    dispatch(setItemCount(whatNumber === 0 ? 1 : whatNumber))
   }
 
   const objectToMap = {
@@ -46,7 +47,6 @@ const ItemDescription = () => {
     "Dimension": "dimentions",
     "Weight": "weight",
   }
-
 
   return (
     <div className='item-description-wrapper'>

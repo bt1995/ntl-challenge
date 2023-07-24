@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
     loading: null,
     itemList: null,
-    error:null
+    error:null,
+    itemCount: localStorage.getItem('cartListAmount')
 }
 
 const itemListSlice = createSlice({
@@ -19,9 +20,12 @@ const itemListSlice = createSlice({
         setError: (state, action) => {
             state.error = action.payload
         },
+        setItemCount: (state, action) => {
+            state.itemCount = action.payload
+        },
     }
 })
 
-export const { setLoading, setError, setItemList } = itemListSlice.actions
+export const { setLoading, setError, setItemList, setItemCount } = itemListSlice.actions
 
 export default itemListSlice.reducer
