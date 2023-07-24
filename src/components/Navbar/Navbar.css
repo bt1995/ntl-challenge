@@ -13,8 +13,10 @@
     height:100%;
 }
 
-@media(max-width:1200px){
-    .navbar{
-        padding:0 20px;
-    }
+.navbar p{
+    margin-right:20px;
+}
+
+.navbar a{
+    margin-left:20px;
 }
