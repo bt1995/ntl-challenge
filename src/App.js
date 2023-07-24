@@ -11,7 +11,7 @@ function App() {
 
   return (
       <div className='App'>
-        <Navbar />
+        <Navbar data={data} />
         <main className='main-container'>
           <Routes>
             <Route path='/' element={<Home data={data} error={error} loading={loading} />} />

@@ -36,3 +36,9 @@
 .item-data{
     font-weight: bold;
 }
+
+@media (max-width:760px){
+    .item-description-container{
+        padding:20px 10px  10px;
+    }
+}
