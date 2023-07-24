@@ -22,7 +22,14 @@ const ItemDescription = () => {
       colorCode: newColorCode, 
       storageCode: newStorageCode
     }
-    const {data} = await axios.post("https://itx-frontend-test.onrender.com/api/cart", dataAsBody)
+    const {data} = await axios.post("https://itx-frontend-test.onrender.com/api/cart", dataAsBody);
+    let previousCount = localStorage.getItem('cartListAmount')
+    if(previousCount){
+      localStorage.setItem('cartListAmount', parseInt(previousCount) + data.count)
+    }else{
+      localStorage.setItem('cartListAmount', data.count)
+    }
+    console.log(localStorage.getItem('cartListAmount'))
   }
 
   const objectToMap = {
