@@ -17,11 +17,13 @@ const ItemDescription = () => {
     if(!isBtnActive) return alert("You must choose both color and storage to continue.");
     const newColorCode = parseInt(colorCode)
     const newStorageCode = parseInt(storageCode)
+    
     const dataAsBody = {
       id, 
       colorCode: newColorCode, 
       storageCode: newStorageCode
     }
+
     const {data} = await axios.post("https://itx-frontend-test.onrender.com/api/cart", dataAsBody);
     let previousCount = localStorage.getItem('cartListAmount')
     if(previousCount){
@@ -29,7 +31,6 @@ const ItemDescription = () => {
     }else{
       localStorage.setItem('cartListAmount', data.count)
     }
-    console.log(localStorage.getItem('cartListAmount'))
   }
 
   const objectToMap = {

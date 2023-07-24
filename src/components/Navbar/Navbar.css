@@ -13,25 +13,8 @@
     height:100%;
 }
 
-
-.search-area{
-    height:100%;
-    display: flex;
-    align-items: center;
-}
-
-.search-area input{
-    height:30px;
-    padding:0 20px;
-    margin:0;
-}
-
 @media(max-width:1200px){
     .navbar-img{
         padding-left:20px;
-    }
-
-    .search-area{
-        padding-right:20px;
     }
 }

@@ -5,5 +5,24 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    padding-top:30px;
+    padding-top:80px;
+    position: relative;
+}
+
+.search-area{
+    position: absolute;
+    top:20px;
+    right:20px;
+}
+
+.search-area input{
+    height:30px;
+    padding:0 20px;
+    margin:0;
+}
+
+@media(max-width:1200px){
+    .search-area{
+        right: auto;
+    }
 }
